@@ -1,0 +1,243 @@
+Question_01
+Define Queue as ADT
+
+**Theory**
+
+1.Queue as ADT
+-->	A **Queue** is an **Abstract Data Type (ADT)** that follows the
+	 **First-In-First-Out (FIFO)** principle.
+    This means that the first element added to the queue will be the first one to be removed,
+	just like people standing in line: the first person in line gets served first.
+	
+	Here are the basic operations of a queue:
+	
+		1. **Enqueue**: Add an element to the back of the queue.
+		2. **Dequeue**: Remove an element from the front of the queue.
+		3. **Front (or Peek)**: Look at the front element without removing it.
+		4. **IsEmpty**: Check if the queue is empty.
+		5. **Size**: Check the number of elements in the queue.
+	
+	Queues are used in many areas like task scheduling, managing requests in web servers, 
+	and handling data in breadth-first search algorithms.
+	
+2.Queue as ADT and Normal Queue
+-->	Summary: Queue as ADT vs Normal ADT
+
+	- **Queue as ADT**:
+	  - Follows **FIFO (First-In-First-Out)** order.
+	  - Elements are **added at the rear** and **removed from the front**.
+	  - Key operations: **Enqueue**, **Dequeue**, **Front (Peek)**, **IsEmpty**, and **Size**.
+	  - Used in real-life scenarios like task scheduling, printer queues, and algorithms 
+	    (e.g., Breadth-First Search).
+	
+	- **Normal ADT**:
+	  - More general, may not follow FIFO.
+	  - Examples: **Arrays**, **Lists**, **Stacks**.
+	  - Can allow **random access** to elements or different removal/insertion rules 
+	  	(e.g., Stack uses LIFO).
+	  - Offers more flexible data management than a queue.
+	
+	In short, the **special feature** of a queue is its **FIFO structure**, 
+	while other ADTs provide more flexibility in how elements are accessed or manipulated.
+	
+3. Is it compulsory to declare the Queue as an Interface?
+--> Summary: Queue as an Interface
+	
+	- **Not Compulsory**: Declaring a queue as an interface is not mandatory.
+	
+	- **Benefits of Using an Interface**:
+	  - Defines a **contract** for queue operations (e.g., `enqueue`, `dequeue`).
+	  - Allows for **multiple implementations** (e.g., array-based, linked list, priority queue).
+	  
+	- **When to Use a Concrete Class**:
+	  - If you need a **specific implementation** without the need for variations,
+	    a concrete class is sufficient.
+	
+	In short, use an interface for flexibility and multiple implementations; otherwise, 
+	a concrete class works fine for a single implementation.
+	
+4.Is it compulsory to make interface for the Queue?
+--> Summary: Queue in Data Structures and Algorithms (DSA) in Java
+
+	1. **Is Interface Required?**:
+	   - **Not Compulsory**: You can implement a queue using a concrete class without an 
+	     interface, especially for simple cases.
+	
+	2. **Built-in Queue Implementations in Java**:
+	
+	   - Java provides built-in classes that implement the **Queue interface**, such as:
+	     - `LinkedList`: A dynamic array-based implementation of a queue.
+	     - `PriorityQueue`: Orders elements based on their priority.
+	     
+	   - Example Usage:
+	   	    
+	     import java.util.LinkedList;
+	     import java.util.Queue;
+	
+	     public class Main {
+	         public static void main(String[] args) {
+	             Queue<Integer> queue = new LinkedList<>();
+	
+	             // Enqueue
+	             queue.add(10);
+	             queue.add(20);
+	             queue.add(30);
+	
+	             // Dequeue
+	             int element = queue.remove(); // Removes 10
+	             System.out.println("Dequeued: " + element);
+	
+	             // Peek
+	             int front = queue.peek(); // Looks at the front element (20)
+	             System.out.println("Front element: " + front);
+	
+	             // Check if empty
+	             System.out.println("Is queue empty? " + queue.isEmpty());
+	         }
+	     }
+	     
+	
+	Conclusion
+	In Java, you can use built-in queue classes for easy implementation without needing to
+	define your own interface. This simplifies the development of queue operations in data 
+	structures and algorithms.
+
+5. Circular Queue Technique
+--> Certainly! Let’s provide a short overview of the **circular queue technique** that includes what happens when the queue is full, along with an example dry run.
+	
+	Circular Queue Technique: Short Overview
+	
+	**Definition**: A circular queue is a data structure that uses a fixed-size array to implement a queue, allowing efficient reuse of space.
+	
+	Key Concepts
+	
+	1. **Array Implementation**:
+	   - Uses an array with two pointers: 
+	     - **`front`**: Points to the first element (to be dequeued).
+	     - **`rear`**: Points to where the next element will be added.
+	
+	2. **Circular Increment**:
+	
+	   - Uses the formula:
+	     ```java
+	     rear = (rear + 1) % capacity; // Wraps around the array
+	     ```
+	   - Allows `rear` to loop back to the start when it reaches the end of the array.
+	
+	Advantages
+	
+	- **Efficient Space Utilization**: Reuses empty spaces after dequeuing.
+	- **FIFO Order**: Maintains First-In-First-Out processing.
+	- **Fast Operations**: Enqueue and dequeue operations are O(1).
+	
+	Limitations
+	
+	1. **Fixed Size**: Cannot grow beyond initial capacity.
+	2. **Complex Management**: Requires careful handling of indices.
+	3. **Array Resizing**: Needs a new array if capacity is exceeded.
+	4. **Inefficient Space Use**: May seem full even with empty spots.
+	5. **Performance Overhead**: Extra checks can slow operations.
+	
+	Handling Full Queue Condition
+	
+	- **When Full**:
+	  - If you attempt to enqueue an element when the queue is full, the operation should be
+	    rejected.
+	  - You can check if the queue is full by comparing the size or checking if:
+	  
+	    ```java
+	    (rear + 1) % capacity == front
+	    ```
+	
+	Dry Run Example
+	
+	Setup
+	
+	- **Queue Capacity**: 5
+	- **Initial State**:
+	  - `front` = 0, `rear` = 0, `size` = 0
+	  - **Array**: `[ , , , , ]` (all empty)
+	
+	Operations
+	
+	1. **Enqueue 10**:
+	   - Check if full: **No**.
+	   - Add 10: 
+	     - `rear = (0 + 1) % 5 = 1`
+	     - **Array**: `[10, , , , ]`
+	     - `size` = 1
+	
+	2. **Enqueue 20**:
+	   - Check if full: **No**.
+	   - Add 20: 
+	     - `rear = (1 + 1) % 5 = 2`
+	     - **Array**: `[10, 20, , , ]`
+	     - `size` = 2
+	
+	3. **Enqueue 30**:
+	   - Check if full: **No**.
+	   - Add 30:
+	     - `rear = (2 + 1) % 5 = 3`
+	     - **Array**: `[10, 20, 30, , ]`
+	     - `size` = 3
+	
+	4. **Enqueue 40**:
+	   - Check if full: **No**.
+	   - Add 40:
+	     - `rear = (3 + 1) % 5 = 4`
+	     - **Array**: `[10, 20, 30, 40, ]`
+	     - `size` = 4
+	
+	5. **Enqueue 50**:
+	   - Check if full: **No**.
+	   - Add 50:
+	     - `rear = (4 + 1) % 5 = 0` (wraps around)
+	     - **Array**: `[10, 20, 30, 40, 50]`
+	     - `size` = 5
+	
+	6. **Enqueue 60** (Queue Full):
+	   - Check if full: **Yes** (since `(0 + 1) % 5 == 0`).
+	   - Operation rejected: Cannot add 60.
+	
+	Summary of Dry Run
+	
+	- After adding elements, the circular queue efficiently uses space. 
+	- Once full, any additional enqueue attempts are rejected, ensuring the queue’s integrity.
+	
+	This concise overview covers the circular queue technique, including its
+	handling of full conditions with a practical dry run example.
+	
+6.Circular algorithm for removing the element 
+--> Dry Run of `dequeue` Method
+
+	1. **Check if Empty**:
+	   - The method checks if the queue is empty by looking at the size.
+	   - If the size is `0`, it throws a `RuntimeException` with the message "Queue is empty."
+	
+	2. **Retrieve Front Element**:
+	   - Gets the element at the `front` index (which is `0`).
+	   - For example, it retrieves `10`.
+	
+	3. **Update Front Index**:
+	   - Increments the `front` index to point to the next element.
+	   - Calculation: `front = (0 + 1) % 5` → `1`.
+	
+	4. **Decrement Size**:
+	   - Decreases the `size` by `1`.
+	   - New size becomes `2`.
+	
+	5. **Return Element**:
+	   - Returns the retrieved element (`10`).
+	
+	What Happens If the Queue is Empty:
+	- If you call `dequeue()` when the queue is empty (size is `0`):
+	  - It checks the size, finds it is `0`, and throws a `RuntimeException` with the message 
+	    "Queue is empty."
+	
+	Final State After Dequeue
+	- **Queue**: Conceptually still `[10, 20, 30]` (but `10` is logically removed).
+	- **Front Index**: Now `1` (pointing to `20`).
+	- **Size**: Now `2`.
+	
+	This summarizes how the `dequeue` method operates, including the behavior when the
+     queue is empty.
