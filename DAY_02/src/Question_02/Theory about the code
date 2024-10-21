@@ -1,0 +1,27 @@
+Question - 2 
+
+**Stack as ADT**
+
+1.Difference between the Normal Stack and Stack as ADT
+-->  Stack as an Abstract Data Type (ADT)
+
+	- **Definition**: A stack is a collection of elements that operates on a Last In,
+	  First Out (LIFO) basis.
+	  
+	- **Key Operations**:
+	  - **push(element)**: Adds an element to the top.
+	  - **pop()**: Removes and returns the top element.
+	  - **peek()**: Returns the top element without removing it.
+	  - **isEmpty()**: Checks if the stack is empty.
+	  - **isFull()**: Checks if the stack is full (if applicable).
+	
+	-Normal Stack (Concrete Implementation)
+	
+	- **Array-Based Stack**: Uses a fixed-size array. Simple and efficient, but
+	  has a maximum capacity.
+	- **Linked List-Based Stack**: Uses nodes connected by pointers. Dynamic sizing
+	  with no fixed capacity, but more memory overhead.
+	
+	Summary
+	- A stack is an ADT for LIFO operations, with normal stacks being specific implementations
+	  that can be array-based or linked list-based.
