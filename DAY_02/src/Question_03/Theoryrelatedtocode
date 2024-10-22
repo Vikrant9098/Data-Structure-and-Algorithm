@@ -1,0 +1,31 @@
+
+
+### 1. Creating a New Array
+
+```java
+T[] newArray = (T[]) new Object[newCapacity];
+```
+- **Purpose**: Creates a new array of type `T` with a specified capacity.
+- **Casting**: We create an array of `Object` and cast it to `T[]` because Java doesn’t allow direct creation of generic arrays.
+
+### 2. Initializing the Internal Array
+
+```java
+array = (T[]) new Object[capacity];
+```
+- **Purpose**: Initializes the stack’s internal array with an initial capacity (often 2).
+- **Why Object?**: We use `Object` to hold any type, and then cast it to `T[]`.
+
+### 3. Copying Elements to the New Array
+
+```java
+System.arraycopy(array, 0, newArray, 0, size);
+```
+- **Purpose**: Copies existing elements from the old array to the new array.
+- **Parameters**: 
+  - `array`: Source array (old array).
+  - `0`: Starting index in the source.
+  - `newArray`: Destination array (new array).
+  - `0`: Starting index in the destination.
+  - `size`: Number of elements to copy.
+- **Efficiency**: `System.arraycopy` is fast because it copies elements in bulk.
