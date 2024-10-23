@@ -1,0 +1,341 @@
+Question_01 : Is it compulsory to create a separate `Node` class for a singly linked list queue?
+
+-->	No, it is not compulsory to create a separate `Node` class for a singly linked list queue. 
+			However, using a `Node` class is beneficial for several reasons:
+			
+			1. **Encapsulation**: The `Node` class encapsulates the data and the link to the next node,
+			 resulting in a cleaner implementation.
+			  
+			2. **Reusability**: A separate `Node` class can be reused in other data structures, such as
+			 stacks or linked lists, without needing to rewrite the structure.
+			  
+			3. **Simplicity**: It simplifies the management of linked list operations (like adding or 
+			removing nodes) since each node has its own data and next reference.
+			
+			While it's possible to implement the queue without a `Node` class, using one is the standard
+			 approach that enhances code clarity and maintainability.
+			 
+			 
+Question_02 : Single Linked List
+
+-->	To determine if the code implements a singly linked list, look for the 
+	following characteristics:
+	
+	1. **Node Structure**: Each node contains data and a single pointer to the next node.
+	   ```java
+	   public class Node {
+	       int data;
+	       Node next; // Pointer to the next node
+	   }
+	   ```
+	
+	2. **Linked List Class**: A class that manages nodes with a reference to the head node.
+	   ```java
+	   public class SinglyLinkedList {
+	       private Node head; // Points to the first node
+	   }
+	   ```
+	
+	3. **No Backward Pointers**: Nodes only have a `next` reference, with no reference to the
+	 previous node.
+	
+	4. **Common Operations**: Methods for insertion (e.g., at head or tail), deletion, and 
+	traversal (iterating through nodes).
+	
+	### Summary:
+	A singly linked list is characterized by nodes with a single `next` pointer, a managing 
+	class with a head reference, and methods that only allow forward traversal without backward
+	pointers.
+	
+
+Question_03 : Various Operations of Singly Linked List
+
+--> Here are various common operations performed on a singly linked list, 
+	along with a brief description of each:
+	
+	### Common Operations on Singly Linked List
+	
+	1. **Insertion**:
+	   - **At the Head**: Adds a new node at the beginning of the list.
+	   - **At the Tail**: Adds a new node at the end of the list.
+	   - **At a Specific Position**: Inserts a new node at a given index or after a 
+	     specific node.
+	
+	   ```java
+	   // Insert at the head
+	   public void addToHead(int value) {
+	       Node newNode = new Node(value);
+	       newNode.next = head;
+	       head = newNode;
+	   }
+	
+	   // Insert at the tail
+	   public void addToTail(int value) {
+	       Node newNode = new Node(value);
+	       if (head == null) {
+	           head = newNode;
+	           return;
+	       }
+	       Node current = head;
+	       while (current.next != null) {
+	           current = current.next;
+	       }
+	       current.next = newNode;
+	   }
+	   ```
+	
+	2. **Deletion**:
+	   - **From the Head**: Removes the first node in the list.
+	   - **From the Tail**: Removes the last node in the list.
+	   - **From a Specific Position**: Deletes a node at a given index or with a 
+	   	 specific value.
+	
+	   ```java
+	   // Delete from the head
+	   public void deleteFromHead() {
+	       if (head != null) {
+	           head = head.next;
+	       }
+	   }
+	   ```
+	
+	3. **Traversal**:
+	   - Iterates through the list to access or print each node's data.
+	   ```java
+	   public void traverse() {
+	       Node current = head;
+	       while (current != null) {
+	           System.out.print(current.data + " ");
+	           current = current.next;
+	       }
+	   }
+	   ```
+	
+	4. **Searching**:
+	   - Finds a node with a specific value and returns its position or reference.
+	   ```java
+	   public Node search(int value) {
+	       Node current = head;
+	       while (current != null) {
+	           if (current.data == value) {
+	               return current; // Node found
+	           }
+	           current = current.next;
+	       }
+	       return null; // Node not found
+	   }
+	   ```
+	
+	5. **Reversing the List**:
+	   - Reverses the order of nodes in the list.
+	   ```java
+	   public void reverse() {
+	       Node prev = null;
+	       Node current = head;
+	       while (current != null) {
+	           Node nextNode = current.next; // Store next node
+	           current.next = prev; // Reverse the link
+	           prev = current; // Move prev and current one step forward
+	           current = nextNode;
+	       }
+	       head = prev; // Update head to the new front
+	   }
+	   ```
+	
+	6. **Finding the Length**:
+	   - Calculates the total number of nodes in the list.
+	   ```java
+	   public int length() {
+	       int count = 0;
+	       Node current = head;
+	       while (current != null) {
+	           count++;
+	           current = current.next;
+	       }
+	       return count;
+	   }
+	   ```
+	
+	### Summary:
+	Common operations on a singly linked list include insertion (at head, tail, or 
+	specific positions), deletion (from head, tail, or specific nodes), traversal (accessing all nodes), searching (finding a specific value), reversing the list, and calculating the length of the list. These operations enable efficient management and manipulation of the data structure.
+
+	
+	DRY RUN 
+	Here's a dry run of the code operations on a singly linked list, covering the 
+	key operations: insertion, deletion, traversal, searching, reversing, and finding 
+	the length.
+
+	### Assumptions:
+	Let's assume the following code snippets for a singly linked list implementation:
+	
+	#### Node Class
+	```java
+	public class Node {
+	    int data; // Holds the integer data
+	    Node next; // Points to the next node in the linked list
+	
+	    public Node(int data) {
+	        this.data = data;
+	        this.next = null; // New node initially points to null
+	    }
+	}
+	```
+	
+	#### SinglyLinkedList Class
+	```java
+	public class SinglyLinkedList {
+	    private Node head; // Points to the first node
+	
+	    // Insertion at the head
+	    public void addToHead(int value) {
+	        Node newNode = new Node(value);
+	        newNode.next = head;
+	        head = newNode;
+	    }
+	
+	    // Insertion at the tail
+	    public void addToTail(int value) {
+	        Node newNode = new Node(value);
+	        if (head == null) {
+	            head = newNode;
+	            return;
+	        }
+	        Node current = head;
+	        while (current.next != null) {
+	            current = current.next;
+	        }
+	        current.next = newNode;
+	    }
+	
+	    // Deletion from the head
+	    public void deleteFromHead() {
+	        if (head != null) {
+	            head = head.next; // Move head to the next node
+	        }
+	    }
+	
+	    // Traversal
+	    public void traverse() {
+	        Node current = head;
+	        while (current != null) {
+	            System.out.print(current.data + " ");
+	            current = current.next; // Move to the next node
+	        }
+	    }
+	
+	    // Searching for a value
+	    public Node search(int value) {
+	        Node current = head;
+	        while (current != null) {
+	            if (current.data == value) {
+	                return current; // Node found
+	            }
+	            current = current.next;
+	        }
+	        return null; // Node not found
+	    }
+	
+	    // Reversing the list
+	    public void reverse() {
+	        Node prev = null;
+	        Node current = head;
+	        while (current != null) {
+	            Node nextNode = current.next; // Store next node
+	            current.next = prev; // Reverse the link
+	            prev = current; // Move prev to current
+	            current = nextNode; // Move current to next node
+	        }
+	        head = prev; // Update head to the new front
+	    }
+	
+	    // Finding the length
+	    public int length() {
+	        int count = 0;
+	        Node current = head;
+	        while (current != null) {
+	            count++;
+	            current = current.next; // Move to the next node
+	        }
+	        return count; // Return the total count of nodes
+	    }
+	}
+	```
+	
+	### Dry Run Example
+	Let’s go through the operations step-by-step using an example of a singly linked list with the values **10, 20, and 30**.
+	
+	1. **Add to Head (10)**
+	   - Create Node(10).
+	   - `head` points to Node(10).
+	
+	   **List**: `10`
+	
+	2. **Add to Tail (20)**
+	   - Create Node(20).
+	   - Start from `head` (Node(10)) and traverse to the end (next is null).
+	   - Set the `next` of Node(10) to Node(20).
+	
+	   **List**: `10 -> 20`
+	
+	3. **Add to Tail (30)**
+	   - Create Node(30).
+	   - Start from `head` (Node(10)), go to Node(20) (next is null).
+	   - Set the `next` of Node(20) to Node(30).
+	
+	   **List**: `10 -> 20 -> 30`
+	
+	4. **Traverse**
+	   - Start from `head` (Node(10)), print `10`.
+	   - Move to Node(20), print `20`.
+	   - Move to Node(30), print `30`.
+	
+	   **Output**: `10 20 30`
+	
+	5. **Delete from Head**
+	   - Move `head` to `head.next` (Node(20)).
+	   
+	   **List**: `20 -> 30`
+	
+	6. **Traverse Again**
+	   - Start from `head` (Node(20)), print `20`.
+	   - Move to Node(30), print `30`.
+	
+	   **Output**: `20 30`
+	
+	7. **Search for 20**
+	   - Start from `head` (Node(20)), found `20`.
+	   - Return Node(20).
+	
+	   **Output**: Node with data `20` found.
+	
+	8. **Search for 10**
+	   - Start from `head` (Node(20)), not found.
+	   - Move to Node(30), not found.
+	   - Return null.
+	
+	   **Output**: Node with data `10` not found.
+	
+	9. **Reverse**
+	   - Initial `prev` is null, `current` is Node(20).
+	   - First iteration: Node(20) points to null, `prev` is now Node(20), `current` moves to Node(30).
+	   - Second iteration: Node(30) points to Node(20), `prev` is now Node(30), `current` is null.
+	   - Set `head` to Node(30).
+	
+	   **List**: `30 -> 20`
+	
+	10. **Traverse After Reversal**
+	    - Start from `head` (Node(30)), print `30`.
+	    - Move to Node(20), print `20`.
+	
+	   **Output**: `30 20`
+	
+	11. **Find Length**
+	    - Start from `head`, count nodes:
+	        - Node(30): count = 1
+	        - Node(20): count = 2
+	
+	   **Output**: Length is `2`.
+	
+	### Summary
+	This dry run illustrates how to manage a singly linked list through common operations like insertion, deletion, traversal, searching, reversing, and finding the length. Each operation manipulates the nodes and updates pointers, showcasing the structure's behavior and management.
